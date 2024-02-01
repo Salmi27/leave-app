@@ -3,7 +3,17 @@ document.querySelector("form").addEventListener("submit", (e) => {
   const fullName = document.getElementById("fullName").value;
   const employeeId = document.getElementById("employeeID").value;
   const leaveType = document.getElementById("leaveType").value;
-  const days = document.getElementById("days").value;
+  const reason = document.getElementById("reason").value;
+  const phoneNumber = document.getElementById("phoneNumber").value;
+  const email = document.getElementById("email").value;
+  const startDate = document.getElementById("startDate").value;
+  const endDate = document.getElementById("endDate").value;
+
+  const days = calculateDays(startDate, endDate);
+  if (days <= 0) {
+    console.log("Invalid date");
+    return;
+  }
 
   fetch("http://localhost:3000/")
     .then((res) => res.json())
@@ -14,33 +24,81 @@ document.querySelector("form").addEventListener("submit", (e) => {
         const [user] = users.filter((user) => user.id == employeeId);
         if (user.act === "wages_board_act") {
           if (leaveType === "annual" && days <= 10 - user.leaveTaken.annual) {
-            submitLeave(employeeId, fullName, leaveType);
+            submitLeave(
+              employeeId,
+              fullName,
+              leaveType,
+              days,
+              reason,
+              phoneNumber,
+              email
+            );
           } else if (
             leaveType === "casual" &&
             days <= 10 - user.leaveTaken.casual
           ) {
-            submitLeave(employeeId, fullName, leaveType);
+            submitLeave(
+              employeeId,
+              fullName,
+              leaveType,
+              days,
+              reason,
+              phoneNumber,
+              email
+            );
           } else if (
             leaveType === "casual" &&
             days <= 10 - user.leaveTaken.casual
           ) {
-            submitLeave(employeeId, fullName, leaveType);
+            submitLeave(
+              employeeId,
+              fullName,
+              leaveType,
+              days,
+              reason,
+              phoneNumber,
+              email
+            );
           } else {
             console.log("Leave Exceeded!!!");
           }
         } else {
           if (leaveType === "annual" && days <= 10 - user.leaveTaken.annual) {
-            submitLeave(employeeId, fullName, leaveType);
+            submitLeave(
+              employeeId,
+              fullName,
+              leaveType,
+              days,
+              reason,
+              phoneNumber,
+              email
+            );
           } else if (
             leaveType === "casual" &&
             days <= 10 - user.leaveTaken.casual
           ) {
-            submitLeave(employeeId, fullName, leaveType);
+            submitLeave(
+              employeeId,
+              fullName,
+              leaveType,
+              days,
+              reason,
+              phoneNumber,
+              email
+            );
           } else if (
             leaveType === "casual" &&
             days <= 10 - user.leaveTaken.casual
           ) {
-            submitLeave(employeeId, fullName, leaveType);
+            submitLeave(
+              employeeId,
+              fullName,
+              leaveType,
+              days,
+              reason,
+              phoneNumber,
+              email
+            );
           } else {
             console.log("Leave Exceeded!!!");
           }
@@ -52,15 +110,6 @@ document.querySelector("form").addEventListener("submit", (e) => {
     .catch((err) => {
       console.error(`Error: ${err}`);
     });
-
-  document.querySelector(".container").innerHTML = `
-      <div class="items">
-        <h5 class="name">Full Name: ${fullName}</h5>
-        <h5 class="id">ID: ${employeeId}</h5>
-        <h5 class="leaveType">Leave Type: ${leaveType}</h5>
-        <h3>Pending</h3>
-      </div>
-    `;
 });
 
 function getEmployees() {
@@ -75,8 +124,16 @@ function getEmployees() {
     });
 }
 
-function submitLeave(id, fullName, leaveType) {
-  console.log(leaveType);
+function submitLeave(
+  id,
+  fullName,
+  leaveType,
+  days,
+  reason,
+  phoneNumber,
+  email
+) {
+  console.log(days);
   fetch("http://localhost:3000/leave", {
     method: "POST",
     headers: {
@@ -86,6 +143,10 @@ function submitLeave(id, fullName, leaveType) {
       id: id,
       fullName: fullName,
       leaveType: leaveType,
+      days: days,
+      reason: reason,
+      phoneNumber: phoneNumber,
+      email: email,
       status: "Pending",
     }),
   })
@@ -96,4 +157,23 @@ function submitLeave(id, fullName, leaveType) {
     .catch((err) => {
       console.error(`Error: ${err}`);
     });
+
+  window.location.href =
+    "http://127.0.0.1:5500/Frontend/formStatus.html?id=" + id;
+}
+
+function calculateDays(start, end) {
+  let date1 = new Date(start);
+  let date2 = new Date(end);
+
+  // Convert dates to timestamps (milliseconds since Jan 1, 1970)
+  let timestamp1 = date1.getTime();
+  let timestamp2 = date2.getTime();
+
+  let differenceInMilliseconds = timestamp2 - timestamp1;
+  let differenceInDays = Math.floor(
+    differenceInMilliseconds / (24 * 60 * 60 * 1000)
+  );
+
+  return differenceInDays;
 }

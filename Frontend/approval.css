@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+h2 {
+    margin: 15px;
+    text-decoration: underline;
+}
+
+.container {
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.item {
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  width: 400px;
+  padding: 15px;
+}
+
+table {
+    border-spacing: 8px;
+}
+
+td {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+button {
+  width: 100px;
+  padding: 5px 6px;
+  margin: 5px 0px;
+  border: none;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/* .approve-btn {
+    background-color: rgb(130, 231, 130);
+}
+
+.reject-btn {
+    background-color: rgb(219, 82, 82);
+} */

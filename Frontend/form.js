@@ -1,26 +1,3 @@
-// const users = [
-//   {
-//     id: 1,
-//     fullName: "blalala",
-//     act: "wages_board_act",
-//     leaveTaken: {
-//       annual: 2,
-//       casual: 14,
-//       medical: 10,
-//     },
-//   },
-//   {
-//     id: 2,
-//     fullName: "ggggg",
-//     act: "shop_office_act",
-//     leaveTaken: {
-//       annual: 5,
-//       casual: 5,
-//       medical: 21,
-//     },
-//   },
-// ];
-
 document.querySelector("form").addEventListener("submit", (e) => {
   e.preventDefault();
   const fullName = document.getElementById("fullName").value;
@@ -37,36 +14,35 @@ document.querySelector("form").addEventListener("submit", (e) => {
         const [user] = users.filter((user) => user.id == employeeId);
         if (user.act === "wages_board_act") {
           if (leaveType === "annual" && days <= 10 - user.leaveTaken.annual) {
-            submitLeave(employeeId, fullName);
-            getEmployees();
+            submitLeave(employeeId, fullName, leaveType);
           } else if (
             leaveType === "casual" &&
             days <= 10 - user.leaveTaken.casual
           ) {
-            submitLeave(employeeId, fullName);
-            getEmployees();
+            submitLeave(employeeId, fullName, leaveType);
           } else if (
             leaveType === "casual" &&
             days <= 10 - user.leaveTaken.casual
           ) {
-            submitLeave(employeeId, fullName);
-            getEmployees();
+            submitLeave(employeeId, fullName, leaveType);
           } else {
             console.log("Leave Exceeded!!!");
           }
         } else {
-          if (leaveType === "annual") {
-            days <= 14 - user.leaveTaken.annual
-              ? console.log("Leave approved!!")
-              : console.log("Leave Exceeded!!");
-          } else if (leaveType === "casual") {
-            days <= 7 - user.leaveTaken.casual
-              ? console.log("Leave approved!!")
-              : console.log("Leave Exceeded!!");
+          if (leaveType === "annual" && days <= 10 - user.leaveTaken.annual) {
+            submitLeave(employeeId, fullName, leaveType);
+          } else if (
+            leaveType === "casual" &&
+            days <= 10 - user.leaveTaken.casual
+          ) {
+            submitLeave(employeeId, fullName, leaveType);
+          } else if (
+            leaveType === "casual" &&
+            days <= 10 - user.leaveTaken.casual
+          ) {
+            submitLeave(employeeId, fullName, leaveType);
           } else {
-            days <= 21 - user.leaveTaken.medical
-              ? console.log("Leave approved!!")
-              : console.log("Leave Exceeded!!");
+            console.log("Leave Exceeded!!!");
           }
         }
       } else {
@@ -76,6 +52,15 @@ document.querySelector("form").addEventListener("submit", (e) => {
     .catch((err) => {
       console.error(`Error: ${err}`);
     });
+
+  document.querySelector(".container").innerHTML = `
+      <div class="items">
+        <h5 class="name">Full Name: ${fullName}</h5>
+        <h5 class="id">ID: ${employeeId}</h5>
+        <h5 class="leaveType">Leave Type: ${leaveType}</h5>
+        <h3>Pending</h3>
+      </div>
+    `;
 });
 
 function getEmployees() {
@@ -90,7 +75,8 @@ function getEmployees() {
     });
 }
 
-function submitLeave(id, fullName) {
+function submitLeave(id, fullName, leaveType) {
+  console.log(leaveType);
   fetch("http://localhost:3000/leave", {
     method: "POST",
     headers: {
@@ -99,6 +85,8 @@ function submitLeave(id, fullName) {
     body: JSON.stringify({
       id: id,
       fullName: fullName,
+      leaveType: leaveType,
+      status: "Pending",
     }),
   })
     .then((res) => res.json())

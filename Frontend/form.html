@@ -7,48 +7,47 @@
     <title>Leave Application</title>
   </head>
   <body>
-    <form id="leaveForm">
-      <!-- Employee Information -->
-      <label for="fullName">Full Name:</label>
-      <input type="text" id="fullName" name="fullName" />
+    <div class="container">
+      <form id="leaveForm">
+        <!-- Employee Information -->
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName" value="Salmi"/>
 
-      <label for="employeeID">Employee ID:</label>
-      <input type="text" id="employeeID" name="employeeID" />
+        <label for="employeeID">Employee ID:</label>
+        <input type="text" id="employeeID" name="employeeID" value="1"/>
 
-      <label for="department">Department:</label>
-      <input type="text" id="department" name="department" />
+        <label for="days">Days:</label>
+        <input type="number" id="days" name="days" value="2"/>
 
-      <label for="days">Days:</label>
-      <input type="number" id="days" name="days" />
+        <!-- Leave Details -->
+        <label for="leaveType">Leave Type:</label>
+        <select id="leaveType" name="leaveType">
+          <option value="annual" selected>Annual</option>
+          <option value="casual">Casual</option>
+          <option value="medical">Medical</option>
+        </select>
 
-      <!-- Leave Details -->
-      <label for="leaveType">Leave Type:</label>
-      <select id="leaveType" name="leaveType">
-        <option value="annual">Annual</option>
-        <option value="casual">Casual</option>
-        <option value="medical">Medical</option>
-      </select>
+        <!-- <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" />
 
-      <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate" name="startDate" />
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate" /> -->
 
-      <label for="endDate">End Date:</label>
-      <input type="date" id="endDate" name="endDate" />
+        <!-- Reason for Leave -->
+        <label for="reason">Reason for Leave:</label>
+        <textarea id="reason" name="reason" rows="4">Sick</textarea>
 
-      <!-- Reason for Leave -->
-      <label for="reason">Reason for Leave:</label>
-      <textarea id="reason" name="reason" rows="4"></textarea>
+        <!-- Contact Information -->
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" value="0774611364"/>
 
-      <!-- Contact Information -->
-      <label for="phoneNumber">Phone Number:</label>
-      <input type="tel" id="phoneNumber" name="phoneNumber" />
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" value="salmirumey27@gmail.com"/>
 
-      <label for="email">Email Address:</label>
-      <input type="email" id="email" name="email" />
-
-      <!-- Submit Button -->
-      <button type="submit">Submit Application</button>
-    </form>
+        <!-- Submit Button -->
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
 
     <script src="./form.js"></script>
   </body>

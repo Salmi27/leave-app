@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 const users = [
   {
     id: 1,
-    fullName: "blalala",
+    fullName: "Salmi",
     act: "wages_board_act",
     leaveTaken: {
       annual: 2,
@@ -21,7 +21,7 @@ const users = [
   },
   {
     id: 2,
-    fullName: "ggggg",
+    fullName: "Sibri",
     act: "shop_office_act",
     leaveTaken: {
       annual: 5,
@@ -41,6 +41,8 @@ app.post("/leave", (req, res) => {
   const user = {
     id: req.body.id,
     fullName: req.body.fullName,
+    leaveType: req.body.leaveType,
+    status: req.body.status,
   };
   pendingLeave.push(user);
   return res.json({ pendingLeave: pendingLeave });
@@ -52,6 +54,27 @@ app.get("/leave", (req, res) => {
   }
 
   return res.json({ pendingLeave: "No pending requests" });
+});
+
+app.post("/approveLeave", (req, res) => {
+  const { id } = req.body;
+
+  const requestIndex = pendingLeave.findIndex((item) => item.id == id);
+  pendingLeave[requestIndex].status = "Approved";
+
+  const userIndex = users.findIndex((item) => item.id == id);
+  users[userIndex].leaveTaken.annual += 1;
+
+  return res.json({ approvedUser: pendingLeave[requestIndex], users: users });
+});
+
+app.post("/rejectLeave", (req, res) => {
+  const { id } = req.body;
+
+  const requestIndex = pendingLeave.findIndex((item) => item.id == id);
+  pendingLeave[requestIndex].status = "Rejected";
+
+  return res.json({ rejectedUser: pendingLeave[requestIndex] });
 });
 
 app.listen(3000, () => console.log("Hey Server Is Running...!"));

@@ -14,12 +14,24 @@
           <section class="left">
             <div>
               <label for="fullName">Full Name:</label>
-              <input type="text" id="fullName" name="fullName" value="Salmi" required/>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="Type your name here"
+                required
+              />
             </div>
 
             <div>
               <label for="employeeID">Employee ID:</label>
-              <input type="text" id="employeeID" name="employeeID" value="1" required/>
+              <input
+                type="text"
+                id="employeeID"
+                name="employeeID"
+                placeholder="Type your Employee ID here"
+                required
+              />
             </div>
             <div>
               <label for="phoneNumber">Phone Number:</label>
@@ -27,7 +39,7 @@
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
-                value="0774611364"
+                placeholder="Type your phone number here"
                 required
               />
             </div>
@@ -37,7 +49,7 @@
                 type="email"
                 id="email"
                 name="email"
-                value="salmirumey27@gmail.com"
+                placeholder="Type your e-mail address here"
                 required
               />
             </div>
@@ -54,22 +66,28 @@
 
             <div>
               <label for="startDate">Start Date:</label>
-              <input type="date" id="startDate" name="startDate" required/>
+              <input type="date" id="startDate" name="startDate" required />
             </div>
 
             <div>
               <label for="endDate">End Date:</label>
-              <input type="date" id="endDate" name="endDate" required/>
+              <input type="date" id="endDate" name="endDate" required />
               <span>* Please select your return date as end date</span>
             </div>
 
             <div>
               <label for="reason">Reason for Leave:</label>
-              <textarea id="reason" name="reason" rows="4" required>Sick</textarea>
+              <textarea
+                id="reason"
+                name="reason"
+                rows="4"
+                placeholder="Type the reason for the leave here"
+                required
+              ></textarea>
             </div>
           </section>
         </div>
-        
+
         <button type="submit">Submit</button>
       </form>
     </div>

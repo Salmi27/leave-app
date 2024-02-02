@@ -3,8 +3,8 @@ const params = new URLSearchParams(window.location.search);
 fetch("http://localhost:3000/leave")
   .then((res) => res.json())
   .then((data) => {
-    const { pendingLeave } = data;
-    const users = pendingLeave.filter((user) => user.id == params.get("id"));
+    const { leaveRequest } = data;
+    const users = leaveRequest.filter((user) => user.id == params.get("id"));
     users.forEach((user) => {
       document.querySelector(".items").innerHTML += `
       <div class="item">

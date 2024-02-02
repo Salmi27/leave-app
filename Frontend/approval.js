@@ -3,9 +3,9 @@ const container = document.querySelector(".container");
 fetch("http://localhost:3000/leave")
   .then((res) => res.json())
   .then((data) => {
-    const { pendingLeave } = data;
-    console.log(pendingLeave);
-    pendingLeave.forEach((item) => {
+    const { leaveRequest } = data;
+    console.log(leaveRequest);
+    leaveRequest.forEach((item) => {
       const div = document.createElement("div");
       div.classList.add("item");
       // To hide the Approved/Rejected Requests

@@ -15,7 +15,7 @@ const users = [
     act: "wages_board_act",
     leaveTaken: {
       annual: 2,
-      casual: 14,
+      casual: 9,
       medical: 10,
     },
   },
@@ -38,7 +38,9 @@ app.get("/", (req, res) => {
 });
 
 app.post("/leave", (req, res) => {
+  const requestId = pendingLeave.length + 1;
   const user = {
+    requestId: requestId,
     id: req.body.id,
     fullName: req.body.fullName,
     leaveType: req.body.leaveType,
@@ -61,9 +63,11 @@ app.get("/leave", (req, res) => {
 });
 
 app.post("/approveLeave", (req, res) => {
-  const { id, leaveType } = req.body;
+  const { id, leaveType, requestId } = req.body;
 
-  const requestIndex = pendingLeave.findIndex((item) => item.id == id);
+  const requestIndex = pendingLeave.findIndex(
+    (item) => item.id == id && item.requestId == requestId
+  );
   pendingLeave[requestIndex].status = "Approved";
 
   const userIndex = users.findIndex((item) => item.id == id);
@@ -73,9 +77,11 @@ app.post("/approveLeave", (req, res) => {
 });
 
 app.post("/rejectLeave", (req, res) => {
-  const { id } = req.body;
+  const { id, requestId } = req.body;
 
-  const requestIndex = pendingLeave.findIndex((item) => item.id == id);
+  const requestIndex = pendingLeave.findIndex(
+    (item) => item.id == id && item.requestId == requestId
+  );
   pendingLeave[requestIndex].status = "Rejected";
 
   return res.json({ rejectedUser: pendingLeave[requestIndex] });

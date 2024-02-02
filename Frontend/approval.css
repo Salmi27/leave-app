@@ -57,3 +57,7 @@ button {
 .reject-btn {
     background-color: rgb(219, 82, 82);
 } */
+
+.hidden {
+  display: none;
+}

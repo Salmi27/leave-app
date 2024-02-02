@@ -11,7 +11,7 @@ document.querySelector("form").addEventListener("submit", (e) => {
 
   const days = calculateDays(startDate, endDate);
   if (days <= 0) {
-    console.log("Invalid date");
+    alert("Invalid rime period. Please Check the Start Date and End Date!");
     return;
   }
 
@@ -47,8 +47,8 @@ document.querySelector("form").addEventListener("submit", (e) => {
               email
             );
           } else if (
-            leaveType === "casual" &&
-            days <= 10 - user.leaveTaken.casual
+            leaveType === "medical" &&
+            days <= 10 - user.leaveTaken.medical
           ) {
             submitLeave(
               employeeId,
@@ -60,10 +60,16 @@ document.querySelector("form").addEventListener("submit", (e) => {
               email
             );
           } else {
-            console.log("Leave Exceeded!!!");
+            alert(
+              `Leave Exceeded. \nYou have: \n - Annual Leave ${
+                10 - user.leaveTaken.annual
+              }\n - Casual Leave ${
+                10 - user.leaveTaken.casual
+              }\n - Medical Leave ${10 - user.leaveTaken.medical}`
+            );
           }
         } else {
-          if (leaveType === "annual" && days <= 10 - user.leaveTaken.annual) {
+          if (leaveType === "annual" && days <= 14 - user.leaveTaken.annual) {
             submitLeave(
               employeeId,
               fullName,
@@ -75,7 +81,7 @@ document.querySelector("form").addEventListener("submit", (e) => {
             );
           } else if (
             leaveType === "casual" &&
-            days <= 10 - user.leaveTaken.casual
+            days <= 7 - user.leaveTaken.casual
           ) {
             submitLeave(
               employeeId,
@@ -87,8 +93,8 @@ document.querySelector("form").addEventListener("submit", (e) => {
               email
             );
           } else if (
-            leaveType === "casual" &&
-            days <= 10 - user.leaveTaken.casual
+            leaveType === "medical" &&
+            days <= 21 - user.leaveTaken.medical
           ) {
             submitLeave(
               employeeId,
@@ -100,7 +106,13 @@ document.querySelector("form").addEventListener("submit", (e) => {
               email
             );
           } else {
-            console.log("Leave Exceeded!!!");
+            alert(
+              `Leave Exceeded. \nYou have: \n - Annual Leave ${
+                14 - user.leaveTaken.annual
+              }\n - Casual Leave ${
+                7 - user.leaveTaken.casual
+              }\n - Medical Leave ${21 - user.leaveTaken.medical}`
+            );
           }
         }
       } else {

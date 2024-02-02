@@ -18,8 +18,24 @@ fetch("http://localhost:3000/leave")
           <td>: ${user.id}</td>
         </tr>
         <tr>
+          <td>Phone Number</td>
+          <td>: ${user.phoneNumber}</td>
+        </tr>
+        <tr>
+          <td>E-mail</td>
+          <td>: ${user.email}</td>
+        </tr>
+        <tr>
           <td>Leave Type</td>
           <td>: ${user.leaveType}</td>
+        </tr>
+        <tr>
+          <td>Start Date</td>
+          <td>: ${user.startDate}</td>
+        </tr>
+        <tr>
+          <td>End Date</td>
+          <td>: ${user.endDate}</td>
         </tr>
         <tr>
           <td>Days</td>
@@ -30,18 +46,14 @@ fetch("http://localhost:3000/leave")
           <td>: ${user.reason}</td>
         </tr>
         <tr>
-          <td>Phone Number</td>
-          <td>: ${user.phoneNumber}</td>
-        </tr>
-        <tr>
-          <td>E-mail</td>
-          <td>: ${user.email}</td>
-        </tr>
-        <tr>
           <td>Status</td>
-          <td>: <span class='${user.status == "Approved" ? "green" : "red"}'>${
-        user.status
-      }</span></td>
+          <td>: <span class='${
+            user.status == "Approved"
+              ? "green"
+              : user.status == "Rejected"
+              ? "red"
+              : "blue"
+          }'>${user.status}</span></td>
         </tr>
       </table>
       </div>

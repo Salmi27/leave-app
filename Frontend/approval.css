@@ -8,30 +8,37 @@
 
 body {
   font-family: "Inter", sans-serif;
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    90deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
 }
 
 h2 {
-    margin: 15px;
-    text-decoration: underline;
+  margin: 15px;
+  text-decoration: underline;
+  text-align: center;
 }
 
 .container {
   padding: 15px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
 }
 
 .item {
-  border: 1px solid black;
   border-radius: 5px;
   background-color: white;
   width: 400px;
   padding: 15px;
+  box-shadow: 0px 1px 10px -2px rgba(0, 0, 0, 0.75);
 }
 
 table {
-    border-spacing: 8px;
+  border-spacing: 8px;
 }
 
 td {
@@ -44,19 +51,11 @@ button {
   padding: 5px 6px;
   margin: 5px 0px;
   border: none;
-  background-color: blueviolet;
+  background-color: rgb(8, 46, 88);
   color: white;
   border-radius: 2px;
   cursor: pointer;
 }
-
-/* .approve-btn {
-    background-color: rgb(130, 231, 130);
-}
-
-.reject-btn {
-    background-color: rgb(219, 82, 82);
-} */
 
 .hidden {
   display: none;

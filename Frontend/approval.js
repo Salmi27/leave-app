@@ -8,7 +8,7 @@ fetch("http://localhost:3000/leave")
     pendingLeave.forEach((item) => {
       const div = document.createElement("div");
       div.classList.add("item");
-
+      // To hide the Approved/Rejected Requests
       // if (item.status != "Pending") {
       //   div.classList.add("hidden");
       // }
@@ -27,6 +27,14 @@ fetch("http://localhost:3000/leave")
             <td>Leave Type</td>
             <td>: ${item.leaveType}</td>
           </tr>
+          <tr>
+          <td>Start Date</td>
+          <td>: ${item.startDate}</td>
+        </tr>
+        <tr>
+          <td>End Date</td>
+          <td>: ${item.endDate}</td>
+        </tr>
           <tr>
             <td>Days</td>
             <td>: ${item.days}</td>
@@ -58,14 +66,16 @@ fetch("http://localhost:3000/leave")
       const approveButton = div.querySelector(".approve-btn");
       const rejectButton = div.querySelector(".reject-btn");
 
+      // Handling Approve Request
       approveButton.addEventListener("click", () => {
         submitDecision("approveLeave", item);
-        //location.reload();
+        location.reload();
       });
 
+      // Handling Reject Request
       rejectButton.addEventListener("click", () => {
         submitDecision("rejectLeave", item);
-        //location.reload();
+        location.reload();
       });
     });
   })
@@ -73,6 +83,7 @@ fetch("http://localhost:3000/leave")
     console.error(`Error: ${err}`);
   });
 
+// Function to perform POST request for Approve & Reject
 function submitDecision(decision, item) {
   fetch(`http://localhost:3000/${decision}`, {
     method: "POST",

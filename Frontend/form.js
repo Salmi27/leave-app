@@ -11,7 +11,7 @@ document.querySelector("form").addEventListener("submit", (e) => {
 
   const days = calculateDays(startDate, endDate);
   if (days <= 0) {
-    alert("Invalid rime period. Please Check the Start Date and End Date!");
+    alert("Invalid time period. Please Check the Start Date and End Date!");
     return;
   }
 
@@ -31,7 +31,9 @@ document.querySelector("form").addEventListener("submit", (e) => {
               days,
               reason,
               phoneNumber,
-              email
+              email,
+              startDate,
+              endDate
             );
           } else if (
             leaveType === "casual" &&
@@ -44,7 +46,9 @@ document.querySelector("form").addEventListener("submit", (e) => {
               days,
               reason,
               phoneNumber,
-              email
+              email,
+              startDate,
+              endDate
             );
           } else if (
             leaveType === "medical" &&
@@ -57,7 +61,9 @@ document.querySelector("form").addEventListener("submit", (e) => {
               days,
               reason,
               phoneNumber,
-              email
+              email,
+              startDate,
+              endDate
             );
           } else {
             alert(
@@ -77,7 +83,9 @@ document.querySelector("form").addEventListener("submit", (e) => {
               days,
               reason,
               phoneNumber,
-              email
+              email,
+              startDate,
+              endDate
             );
           } else if (
             leaveType === "casual" &&
@@ -90,7 +98,9 @@ document.querySelector("form").addEventListener("submit", (e) => {
               days,
               reason,
               phoneNumber,
-              email
+              email,
+              startDate,
+              endDate
             );
           } else if (
             leaveType === "medical" &&
@@ -103,7 +113,9 @@ document.querySelector("form").addEventListener("submit", (e) => {
               days,
               reason,
               phoneNumber,
-              email
+              email,
+              startDate,
+              endDate
             );
           } else {
             alert(
@@ -124,6 +136,7 @@ document.querySelector("form").addEventListener("submit", (e) => {
     });
 });
 
+// Function to Get all employee details
 function getEmployees() {
   fetch("http://localhost:3000/")
     .then((res) => res.json())
@@ -136,6 +149,7 @@ function getEmployees() {
     });
 }
 
+// Function to make POST request
 function submitLeave(
   id,
   fullName,
@@ -143,7 +157,9 @@ function submitLeave(
   days,
   reason,
   phoneNumber,
-  email
+  email,
+  startDate,
+  endDate
 ) {
   console.log(days);
   fetch("http://localhost:3000/leave", {
@@ -159,6 +175,8 @@ function submitLeave(
       reason: reason,
       phoneNumber: phoneNumber,
       email: email,
+      startDate: startDate,
+      endDate: endDate,
       status: "Pending",
     }),
   })
@@ -174,11 +192,11 @@ function submitLeave(
     "http://127.0.0.1:5500/Frontend/formStatus.html?id=" + id;
 }
 
+// Function to calculate number of leave days
 function calculateDays(start, end) {
   let date1 = new Date(start);
   let date2 = new Date(end);
 
-  // Convert dates to timestamps (milliseconds since Jan 1, 1970)
   let timestamp1 = date1.getTime();
   let timestamp2 = date2.getTime();
 

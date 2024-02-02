@@ -49,6 +49,8 @@ app.post("/leave", (req, res) => {
     phoneNumber: req.body.phoneNumber,
     email: req.body.email,
     status: req.body.status,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
   };
   pendingLeave.push(user);
   return res.json({ pendingLeave: pendingLeave });
@@ -63,7 +65,7 @@ app.get("/leave", (req, res) => {
 });
 
 app.post("/approveLeave", (req, res) => {
-  const { id, leaveType, requestId } = req.body;
+  const { id, leaveType, requestId, days } = req.body;
 
   const requestIndex = pendingLeave.findIndex(
     (item) => item.id == id && item.requestId == requestId
@@ -71,7 +73,7 @@ app.post("/approveLeave", (req, res) => {
   pendingLeave[requestIndex].status = "Approved";
 
   const userIndex = users.findIndex((item) => item.id == id);
-  users[userIndex].leaveTaken[`${leaveType}`] += 1;
+  users[userIndex].leaveTaken[`${leaveType}`] += days;
 
   return res.json({ approvedUser: pendingLeave[requestIndex], users: users });
 });

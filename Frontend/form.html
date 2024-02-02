@@ -12,7 +12,6 @@
       <form id="leaveForm">
         <div>
           <section class="left">
-            <!-- Employee Information -->
             <div>
               <label for="fullName">Full Name:</label>
               <input type="text" id="fullName" name="fullName" value="Salmi" required/>
@@ -22,8 +21,6 @@
               <label for="employeeID">Employee ID:</label>
               <input type="text" id="employeeID" name="employeeID" value="1" required/>
             </div>
-
-            <!-- Contact Information -->
             <div>
               <label for="phoneNumber">Phone Number:</label>
               <input
@@ -45,8 +42,7 @@
               />
             </div>
           </section>
-          <section>
-            <!-- Leave Details -->
+          <section class="right">
             <div>
               <label for="leaveType">Leave Type:</label>
               <select id="leaveType" name="leaveType" required>
@@ -64,17 +60,16 @@
             <div>
               <label for="endDate">End Date:</label>
               <input type="date" id="endDate" name="endDate" required/>
+              <span>* Please select your return date as end date</span>
             </div>
 
-            <!-- Reason for Leave -->
             <div>
               <label for="reason">Reason for Leave:</label>
               <textarea id="reason" name="reason" rows="4" required>Sick</textarea>
             </div>
           </section>
         </div>
-
-        <!-- Submit Button -->
+        
         <button type="submit">Submit</button>
       </form>
     </div>
